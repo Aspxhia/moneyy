@@ -1,0 +1,15 @@
+name: Moneyy
+version: '${project.version}'
+main: money.moneyy.Main
+api-version: 1.18
+commands:
+  dinar_goster:
+    description: Para Gösterir
+  dinar_dagit:
+    description: Para Dagitir
+  dinar_ver:
+    description: İstediğiniz Kullanıcıya, istediğiniz miktarda dinar verir.
+  zar:
+    description: Zar atmaya yarar. /zar 6 gibi sayı belirtilerek atılabilir.
+  krallik_elf_yeniuye:
+    description: Elf Krallıgına yeni üye ekler.
