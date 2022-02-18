@@ -40,7 +40,7 @@ public class Factions {
 
                 if (!(res.next())){
                     statement.executeUpdate("INSERT INTO factions(uid,faction,factionRole,playerName) VALUES ('" + player.getUniqueId() + "','Elf','Elf','"+player.getDisplayName()+"');");
-                    sendMessageToAllElves(player.getDisplayName() + " Elflerin arasında yerini aldı.");
+                    sendMessageToAllElves(ChatColor.DARK_GREEN+player.getDisplayName() + " Elflerin arasında yerini aldı.");
 
                 }
                 else{
@@ -56,28 +56,19 @@ public class Factions {
     }
 
     public void sendMessageToAllElves(String Message){
-        List<String> list2 = new ArrayList<>();
+        String playerName;
         try{
             Statement statement = connect().createStatement();
             ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE faction = 'Elf'");
 
-                while(res.next()){
-                    list2.add(res.getString("uid"));
-                }
+            while(res.next()) {
 
-                for (String uids : list2) {
-                    Player player = getServer().getPlayer(uids);
-                    if (player != null){
-                        player.sendMessage(ChatColor.DARK_GREEN + Message);
-                    }
+                playerName = res.getString("playerName");
+                getServer().getPlayer(playerName).sendMessage(Message);
+            }
 
-                }
 
-                for (String uids : list2) {
-                    Player player = getServer().getPlayer(uids);
-                    System.out.println(uids);
 
-                }
             }
 
         catch (Exception ex){
