@@ -40,7 +40,7 @@ public class Factions {
 
                 if (!(res.next())){
                     statement.executeUpdate("INSERT INTO factions(uid,faction,factionRole,playerName) VALUES ('" + player.getUniqueId() + "','Elf','Elf','"+player.getDisplayName()+"');");
-                    sendMessageToAllElves(ChatColor.DARK_GREEN+player.getDisplayName() + " Elflerin arasında yerini aldı.");
+                    sendMessageToAllRacesonJoin(ChatColor.DARK_GREEN+player.getDisplayName() + " Elflerin arasında yerini aldı.","Elf");
 
                 }
                 else{
@@ -55,11 +55,35 @@ public class Factions {
         }
     }
 
-    public void sendMessageToAllElves(String Message){
+    public void addPlayertoFactionofHuman(Player player3,String name) {
+        Player player = getServer().getPlayer(name);
+        if (player != null){
+            try {
+                Statement statement = connect().createStatement();
+                ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE uid = '" + player.getUniqueId() + "';");
+
+                if (!(res.next())){
+                    statement.executeUpdate("INSERT INTO factions(uid,faction,factionRole,playerName) VALUES ('" + player.getUniqueId() + "','İnsan','İnsan','"+player.getDisplayName()+"');");
+                    sendMessageToAllRacesonJoin(ChatColor.DARK_GREEN+player.getDisplayName() + " İnsanların arasında yerini aldı.","İnsan");
+
+                }
+                else{
+
+                    player3.sendMessage("Zaten bu kişi bir factiona kayıtlı !");
+                }
+
+            }
+            catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    public void sendMessageToAllRacesonJoin(String Message,String Faction){
         String playerName;
         try{
             Statement statement = connect().createStatement();
-            ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE faction = 'Elf'");
+            ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE faction = '"+Faction+"' ");
 
             while(res.next()) {
 
@@ -74,6 +98,56 @@ public class Factions {
         catch (Exception ex){
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void getmyFaction(ChatColor chatcolor,Player player){
+        if (player != null) {
+            String Fact = "";
+            try {
+                Statement statement = connect().createStatement();
+                ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE uid = '" + player.getUniqueId() + "' ");
+
+                if (res.next()) {
+
+                    Fact = res.getString("faction");
+                    player.sendMessage(chatcolor + Fact + " Krallığına üyesiniz.");
+
+                }
+
+                else{
+                    player.sendMessage(chatcolor +"Herhangi bir krallıkta kayıtlı değilsiniz.");
+                }
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+
+        }
+    }
+
+
+    public String whatismyFaction(Player player){
+        String Fact = "";
+        if (player != null) {
+            try {
+                Statement statement = connect().createStatement();
+                ResultSet res = statement.executeQuery("SELECT * FROM factions WHERE uid = '" + player.getUniqueId() + "' ");
+
+                if (res.next()) {
+
+                    Fact = res.getString("faction");
+                }
+
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+
+        }
+
+        return Fact;
     }
 
 }

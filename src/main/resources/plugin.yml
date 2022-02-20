@@ -13,3 +13,17 @@ commands:
     description: Zar atmaya yarar. /zar 6 gibi sayı belirtilerek atılabilir.
   krallik_elf_yeniuye:
     description: Elf Krallıgına yeni üye ekler.
+  krallik_insan_yeniuye:
+    description: İnsan Krallığına yeni üye ekler.
+  krallik:
+    description: Hangi Krallıktan olduğunuzu belirler
+  me:
+    description: Rolde Hareket komutudur
+  do:
+    description: Rolde Bilgi verme ile ilgili kullanılır
+  s:
+    description: Rolde bağırmak için kullanılır
+  w:
+    description: Rolde fısıldamak için kullanılır
+
+
