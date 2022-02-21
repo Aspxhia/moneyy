@@ -25,5 +25,10 @@ commands:
     description: Rolde bağırmak için kullanılır
   w:
     description: Rolde fısıldamak için kullanılır
+  meslek_sec:
+    description: Meslek seçmek için kullanılır
+    aliases: [Paladin]
+  meslek:
+    description: Meslek öğrenmek için kullanılır
 
 

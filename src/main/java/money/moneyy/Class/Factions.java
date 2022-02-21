@@ -1,4 +1,4 @@
-package money.moneyy;
+package money.moneyy.Class;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -41,7 +41,6 @@ public class Factions {
                 if (!(res.next())){
                     statement.executeUpdate("INSERT INTO factions(uid,faction,factionRole,playerName) VALUES ('" + player.getUniqueId() + "','Elf','Elf','"+player.getDisplayName()+"');");
                     sendMessageToAllRacesonJoin(ChatColor.DARK_GREEN+player.getDisplayName() + " Elflerin arasında yerini aldı.","Elf");
-
                 }
                 else{
 
@@ -65,7 +64,6 @@ public class Factions {
                 if (!(res.next())){
                     statement.executeUpdate("INSERT INTO factions(uid,faction,factionRole,playerName) VALUES ('" + player.getUniqueId() + "','İnsan','İnsan','"+player.getDisplayName()+"');");
                     sendMessageToAllRacesonJoin(ChatColor.DARK_GREEN+player.getDisplayName() + " İnsanların arasında yerini aldı.","İnsan");
-
                 }
                 else{
 

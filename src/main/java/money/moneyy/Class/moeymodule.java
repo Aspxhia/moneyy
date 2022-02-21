@@ -1,9 +1,6 @@
-package money.moneyy;
+package money.moneyy.Class;
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import money.moneyy.Class.dashboardForPlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
@@ -117,20 +114,21 @@ public class moeymodule {
             if (resultSet.next()) {
 
                 ResultSet res = statement.executeQuery("SELECT * FROM playermoney WHERE uid = '" + fromPlayer.getUniqueId() + "';");
-                System.out.println("from playerin idsini buldu veri tabanında");
                 if (res.next()) {
 
                     if (res.getString("uid") == null) {
                         return "0";
                     }
                     else if(res.getString("uid") != null){
-                        System.out.println("uid boş değilse girdi");
                         if(res.getInt("money") >= amount){
 
                             statement.executeUpdate("UPDATE playermoney SET Money = money-'" + amount + "' WHERE uid = '" + fromPlayer.getUniqueId() + "';");
-                            System.out.println("1.update attı");
+                            dashboardForPlayer fromPlayerDasboard = new dashboardForPlayer();
+                            fromPlayerDasboard.playerScoreboard(fromPlayer);
                             statement.executeUpdate("UPDATE playermoney SET Money = money+'" + amount + "' WHERE uid = '" + toPlayer.getUniqueId() + "';");
-                            System.out.println("2.update attı");
+                            dashboardForPlayer toPlayerDasboard = new dashboardForPlayer();
+                            toPlayerDasboard.playerScoreboard(toPlayer);
+
                             return "1";
                         }
 

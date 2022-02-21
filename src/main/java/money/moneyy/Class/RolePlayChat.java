@@ -1,4 +1,4 @@
-package money.moneyy;
+package money.moneyy.Class;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
